@@ -266,10 +266,7 @@
 % whose default value depends on the option listings.
 
 \newcommand{\m@ximawritetempfile}
-{\par
- \noindent
- \maximaverbatiminput{\m@ximatempfile}
- \par}
+{\maximaverbatiminput{\m@ximatempfile}}
 
 % The \maximaverbatiminput command depends on whether the
 % listings option is given.
@@ -384,10 +381,8 @@
 %% The middle of the box
 
 \newcommand{\maximaoutputmarker}
-{\par\noindent
- \hspace*{\maximaindent}
- \rule{.4\linewidth}{0.4pt}
- \par\noindent}
+{\hspace*{\maximaindent}
+  \rule{.4\linewidth}{0.4pt}}
 
 % \newcommand{\maximaoutputmarker}
 % {\par\noindent
@@ -430,7 +425,7 @@
 \newcommand{\maximaoutput}{}
 
 \newenvironment{maxima}[1][]%
-{~\par\renewcommand{\maximaoutput}
+{\renewcommand{\maximaoutput}
  {\@ifstar{\maximatexoutput}{\maximaverbatimoutput}}
  \begingroup
  \m@ximasetname{#1}
@@ -439,14 +434,8 @@
  \maximatop
  \ifthenelse{\equal{\m@ximapartname}{}}
  {\m@ximastartwrite}{\m@ximastartwriteskipline}}
-{\ifthenelse{\boolean{m@ximaverbatimoutput}}
-  {}                           % verbatim output
-  {\ifthenelse{\boolean{m@ximatexoutput}}
-    {\par\noindent}            % TeX output
-    {}}                        % no output
- \maximabottom
- \endgroup
- \par\noindent}
+{\maximabottom
+ \endgroup}
 
 \newcommand{\maximaverbatimoutput}
 {\setboolean{m@ximaverbatimoutput}{true}
@@ -455,11 +444,9 @@
 
 \newcommand{\maximatexoutput}
 {\def\m##1\\{%
-    \par\noindent
     \begingroup\maximafont\color{\maximaoutputcolor}
     \begin{em@ximam@th} ##1 \end{em@ximam@th}\endgroup}
  \def\t##1.##2\\{%
-   \par\noindent
    \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}
    {(\%t##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}
  \def\p{\begingroup\color{\maximaoutputcolor}
@@ -467,7 +454,8 @@
  \setboolean{m@ximatexoutput}{true}
  \maximamiddle
  \m@ximaindent
- \par\noindent}
+ % \par\noindent
+}
 
 %% Some stuff to help with lists of examples
 
@@ -521,7 +509,7 @@
 \newcommand{\maximasessionbottom}{}
 
 \newenvironment{maximasession}[1][]
-{~\par\renewcommand{\maximaoutput}
+{\renewcommand{\maximaoutput}
   {\begingroup
    \@ifstar{\maximasessiontexoutput}{\maximasessionverbatimoutput}}
  \ifthenelse{\equal{#1}{}}
@@ -532,10 +520,10 @@
  \m@ximastartcomment}
 {\ifthenelse{\boolean{m@ximasessionverbatimoutput}} 
  {\maximasessionbottom
-  \endgroup\par\noindent}  % verbatim output
+  \endgroup}  % verbatim output
  {\ifthenelse{\boolean{m@ximasessiontexoutput}}
-   {\par\maximasessionbottom
-    \endgroup\par\noindent}               % TeX output
+   {\maximasessionbottom
+    \endgroup}               % TeX output
    {}}}
 
 \newenvironment{maximanu}
@@ -600,15 +588,12 @@
 {\def\i{\begingroup\color{\maximainputcolor}
     \setupm@ximasessionverbatim\dom@ximatexsessionverbatim}
  \def\o##1.##2\\{%
-   \par\noindent
    \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}
    {(\%o##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}
  \def\oo##1\\{%
-   \par\noindent
    \begingroup\maximafont\color{\maximaoutputcolor}
    \begin{em@ximam@th} ##1 \end{em@ximam@th}\endgroup}
  \def\t##1.##2\\{%
-   \par\noindent
    \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}
    {(\%t##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}
  \def\ps{maximasessionpreoutput}
