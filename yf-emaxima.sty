@@ -236,7 +236,7 @@
   \m@xima@next}
 
 \def\m@xima@parwrite#1\par{%
-\immediate\write\m@ximaout{}
+\immediate\write\m@ximaout{}%
 \m@ximawrite}
 
 \def\m@ximawritetwo#1 {%
@@ -275,7 +275,7 @@
 \newlength{\maximaindent}
 \setlength{\maximaindent}{2ex}
 \newcommand{\m@ximaindent}
-{\setlength{\leftskip}{\maximaindent}
+{\setlength{\leftskip}{\maximaindent}%
  \setlength{\rightskip}{\maximaindent}}
 
 
@@ -298,7 +298,7 @@
 
 \newboolean{m@ximaendsincolon}
 \newcommand{\maximaendsincolon}[1]
-{\setboolean{m@ximaendsincolon}{false}
+{\setboolean{m@ximaendsincolon}{false}%
  \m@ximacheckcolon#1\end}
 
 \newcommand{\m@ximacheckcolon}[1]
@@ -306,10 +306,10 @@
    \let\next=\relax
  \else
    \let\next=\m@ximacheckcolon
-   \ifx#1:
-      \setboolean{m@ximaendsincolon}{true}
+   \ifx#1:%
+      \setboolean{m@ximaendsincolon}{true}%
    \else
-      \setboolean{m@ximaendsincolon}{false}
+      \setboolean{m@ximaendsincolon}{false}%
    \fi
  \fi
  \next}
@@ -328,7 +328,7 @@
 {}
 
 \newenvironment{maximaoutputonly}[1][]% recopié de {maxima}
-{\renewcommand{\maximaoutput}
+{\renewcommand{\maximaoutput}%
  {\@ifstar{\maximatexoutput}{\maximaverbatimoutput}}%
  \def\maximamiddle{}%
  \m@ximastartcomment}
@@ -381,7 +381,7 @@
 %% The middle of the box
 
 \newcommand{\maximaoutputmarker}
-{\hspace*{\maximaindent}
+{\hspace*{\maximaindent}%
   \rule{.4\linewidth}{0.4pt}}
 
 % \newcommand{\maximaoutputmarker}
@@ -398,7 +398,7 @@
 %% Setting the name
 
 \newcommand{\m@ximasetname}[1]
-{\maximaendsincolon{#1}
+{\maximaendsincolon{#1}%
  \ifthenelse{\equal{#1}{}}
    {\renewcommand{\m@ximapartname}{}}
    {\ifthenelse{\boolean{m@ximaendsincolon}}
@@ -426,11 +426,11 @@
 
 \newenvironment{maxima}[1][]%
 {\renewcommand{\maximaoutput}
- {\@ifstar{\maximatexoutput}{\maximaverbatimoutput}}
+ {\@ifstar{\maximatexoutput}{\maximaverbatimoutput}}%
  \begingroup
- \m@ximasetname{#1}
- \setboolean{m@ximaverbatimoutput}{false}
- \setboolean{m@ximatexoutput}{false}
+ \m@ximasetname{#1}%
+ \setboolean{m@ximaverbatimoutput}{false}%
+ \setboolean{m@ximatexoutput}{false}%
  \maximatop
  \ifthenelse{\equal{\m@ximapartname}{}}
  {\m@ximastartwrite}{\m@ximastartwriteskipline}}
@@ -438,20 +438,20 @@
  \endgroup}
 
 \newcommand{\maximaverbatimoutput}
-{\setboolean{m@ximaverbatimoutput}{true}
+{\setboolean{m@ximaverbatimoutput}{true}%
  \maximamiddle
  \m@ximastartwrite}
 
 \newcommand{\maximatexoutput}
 {\def\m##1\\{%
-    \begingroup\maximafont\color{\maximaoutputcolor}
-    \begin{em@ximam@th} ##1 \end{em@ximam@th}\endgroup}
+    \begingroup\maximafont\color{\maximaoutputcolor}%
+    \begin{em@ximam@th} ##1 \end{em@ximam@th}\endgroup}%
  \def\t##1.##2\\{%
-   \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}
-   {(\%t##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}
- \def\p{\begingroup\color{\maximaoutputcolor}
-   \setupm@ximasessionverbatim\dom@ximasessionpreprompt}
- \setboolean{m@ximatexoutput}{true}
+   \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}%
+   {(\%t##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}%
+ \def\p{\begingroup\color{\maximaoutputcolor}%
+   \setupm@ximasessionverbatim\dom@ximasessionpreprompt}%
+ \setboolean{m@ximatexoutput}{true}%
  \maximamiddle
  \m@ximaindent
  % \par\noindent
@@ -478,6 +478,7 @@
  }
  \newcommand{\maxcaption}[1]{\addcontentsline{lom}{figure}
    {\protect\numberline{\thechapter.\themaximaexample} {\protect\ignorespaces #1}}}}
+% else (@ifclassloaded{book})
 {\newcounter{maximaexample}
  \newcommand\listofmaximaexamples{%
      \if@twocolumn
@@ -511,12 +512,12 @@
 \newenvironment{maximasession}[1][]
 {\renewcommand{\maximaoutput}
   {\begingroup
-   \@ifstar{\maximasessiontexoutput}{\maximasessionverbatimoutput}}
+   \@ifstar{\maximasessiontexoutput}{\maximasessionverbatimoutput}}%
  \ifthenelse{\equal{#1}{}}
-  {}{\stepcounter{maximaexample}
+  {}{\stepcounter{maximaexample}%
    \maxcaption{#1}}
- \setboolean{m@ximasessionverbatimoutput}{false}
- \setboolean{m@ximasessiontexoutput}{false}
+ \setboolean{m@ximasessionverbatimoutput}{false}%
+ \setboolean{m@ximasessiontexoutput}{false}%
  \m@ximastartcomment}
 {\ifthenelse{\boolean{m@ximasessionverbatimoutput}} 
  {\maximasessionbottom
@@ -549,7 +550,7 @@
 {}
 
 \newcommand{\maximasessionverbatimoutput}
-{\setboolean{m@ximasessionverbatimoutput}{true}
+{\setboolean{m@ximasessionverbatimoutput}{true}%
  \maximasessiontop
  \m@ximastartwrite}
 
@@ -575,7 +576,7 @@
 
 \def\m@ximauncatcodespecials{\def\do##1{\catcode`##1=12 }\dospecials}
 \def\m@ximapercent{\%}
-\def\setupm@ximasessionverbatim{
+\def\setupm@ximasessionverbatim{%
 \obeylines \m@ximauncatcodespecials \obeyspaces}
 {\obeyspaces\global\let =\ }
 {\catcode`\|=0 \catcode`\\=12 %
@@ -585,23 +586,23 @@
 \newcommand{\maximasessionpreoutput}{}
 
 \newcommand{\m@ximasetupsessiontexoutput}
-{\def\i{\begingroup\color{\maximainputcolor}
-    \setupm@ximasessionverbatim\dom@ximatexsessionverbatim}
+{\def\i{\begingroup\color{\maximainputcolor}%
+    \setupm@ximasessionverbatim\dom@ximatexsessionverbatim}%
  \def\o##1.##2\\{%
-   \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}
-   {(\%o##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}
+   \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}%
+   {(\%o##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}%
  \def\oo##1\\{%
-   \begingroup\maximafont\color{\maximaoutputcolor}
-   \begin{em@ximam@th} ##1 \end{em@ximam@th}\endgroup}
+   \begingroup\maximafont\color{\maximaoutputcolor}%
+   \begin{em@ximam@th} ##1 \end{em@ximam@th}\endgroup}%
  \def\t##1.##2\\{%
-   \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}
-   {(\%t##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}
- \def\ps{maximasessionpreoutput}
- \def\p{\begingroup\color{\maximaoutputcolor}
+   \begingroup\maximafont\color{\maximaoutputcolor}\textcolor{\maximapromptcolor}%
+   {(\%t##1)}\begin{em@ximam@th} ##2 \end{em@ximam@th}\endgroup}%
+ \def\ps{maximasessionpreoutput}%
+ \def\p{\begingroup\color{\maximaoutputcolor}%
    \setupm@ximasessionverbatim\dom@ximasessionpreprompt}}
 
 \newcommand{\maximasessiontexoutput}
-{\setboolean{m@ximasessiontexoutput}{true}
+{\setboolean{m@ximasessiontexoutput}{true}%
  \maximasessiontop
  \m@ximasetupsessiontexoutput
  \m@ximaindent}
