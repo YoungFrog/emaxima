@@ -330,6 +330,12 @@
 {\m@ximastartfullcomment}
 {}
 
+\newenvironment{maximaoutputonly}[1][]% recopié de {maxima}
+{\renewcommand{\maximaoutput}
+ {\@ifstar{\maximatexoutput}{\maximaverbatimoutput}}%
+ \def\maximamiddle{}%
+ \m@ximastartcomment}
+{\maximabottom}
 \newenvironment{maximasession*}[1][]
 {\m@ximastartfullcomment}
 {}
